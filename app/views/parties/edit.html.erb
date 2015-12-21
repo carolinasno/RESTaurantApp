@@ -5,25 +5,28 @@
 </div>
 <div class="row">
   <%= form_for @party do |f| %>
-  <div class="five columns">
+  <div class="three columns">
     <%= f.label :name %>
     <%= f.text_field :name %>
   </div>
-  <div class="five columns">
+  <div class="three columns">
     <%= f.label :guests %>
     <%= f.number_field :guests %>
   </div>
-</div>
-<div class="row">
-  <div class="four columns">
-    <%= f.label :table_number %>
-    <%= f.text_field :table_number %>
-  </div>
-  <div class="four columns">
-    <%= f.label :user_id %>
-    <%= f.number_field :user_id %>
-  </div>
+  <% end %>
+  <%= form_for @table do |t| %>
   <div class="three columns">
+    <%= t.label :table_number %>
+    <%= t.text_field :table_number %>
+  </div>
+  <% end %>
+  <%= form_for @user do |u| %>
+  <div class="three columns">
+    <%= u.label :username %>
+    <%= u.number_field :username %>
+  </div>
+  <% end %>
+  <div class="two columns">
     <%= f.label :submit %>
     <%= f.submit %>
   </div>

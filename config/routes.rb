@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :order_tickets
   resources :menu_items
   resources :parties
+  resources :tables
 
   root 'welcome#index'
 
@@ -11,9 +12,12 @@ Rails.application.routes.draw do
   get '/log_in' => 'users#log_in'
   get '/profile' => 'users#profile'
   get '/parties' => 'parties#index'
+  get '/tables' => 'tables#index'
+  get '/parties/new' => 'parties#new'
 
   post 'menu_items/:id/edit' => 'menu_items#edit'
   post 'parties/:id/edit' => 'parties#edit'
+  post 'tables/:id/edit' => 'tables#edit'
 
   post '/sessions' => 'sessions#create'
   delete '/sessions' => 'sessions#destroy'

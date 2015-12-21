@@ -7,11 +7,11 @@
   <%= form_for @user do |f| %>
   <div class="four columns">
     <%= f.label :username %>
-    <%= f.text_field :username %>
+    <%= f.text_field :username, :placeholder => "Username" %>
   </div>
   <div class="four columns">
     <%= f.label :password %>
-    <%= f.password_field :password %>
+    <%= f.password_field :password, :placeholder => "Password" %>
   </div>
   <div class="two columns">
     <%= f.label :submit %>

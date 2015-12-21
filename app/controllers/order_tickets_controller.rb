@@ -13,8 +13,7 @@ class OrderTicketsController < ApplicationController
   private
 
   def order_ticket_params
-    params.require(:order_ticket).permit(:party_id, :menu_item_id, :seat_number, :status)
+    params.require(:order_ticket).permit(:party_id, :menu_item_id, :status)
   end
-
 
 end

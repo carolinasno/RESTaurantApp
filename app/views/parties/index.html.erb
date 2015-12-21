@@ -1,49 +1,101 @@
-<div class="row">
-  <div class="twelve columns">
-    <h1>Parties</h1>
-  </div>
-</div>
-<div class="row">
-  <%= form_for @party do |f| %>
-  <div class="five columns">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </div>
-  <div class="five columns">
-    <%= f.label :guests %>
-    <%= f.number_field :guests %>
-  </div>
-</div>
-<div class="row">
-  <div class="four columns">
-    <%= f.label :table_number %>
-    <%= f.text_field :table_number %>
-  </div>
-  <div class="four columns">
-    <%= f.label :server %>
-    <%= f.number_field :user_id %>
-  </div>
-  <div class="three columns">
-    <%= f.label :submit %>
-    <%= f.submit %>
-  </div>
-  <% end %>
-</div>
+<h1>Active Parties</h1>
 
-<div class="row">
+<a class="button" href="/parties/new">New Party</a>
+<!--
+<div class="ticket">
   <ul>
     <% @parties.each do |party| %>
-      <div class="eight columns">
-        <li>
-          <strong>Guest Name:</strong> <%= party.name %>, <strong># of Guests:</strong> <%= party.guests %>, <strong>Table #:</strong> <%= party.table_number %>, <strong>Server:</strong> <%= party.user_id %>
-        </li>
-      </div>
-      <div class="two columns">
-        <%= button_to "Edit", edit_party_path(party), method: :edit %>
-      </div>
-      <div class="two columns">
-        <%= button_to "Remove", party_path(party), method: :delete %>
-      </div>
+    <li>Party Name: <%= party.name %></li>
+    <li>Number of Guests: <%= party.guests %></li>
+    <% end %>
+    <% @users.each do |user| %>
+    <li>Server: <%= user.username %></li>
+    <% end %>
+    <% @tables.each do |table| %>
+    <li>Table Number: <%= table.table_number %></li>
+    <% end %>
+    <% @order_tickets.each do |order_ticket| %>
+    <li>Status: <%= order_ticket.status %></li>
     <% end %>
   </ul>
 </div>
+ -->
+
+<!-- <div class="ticket">
+  <% @parties.each do |party| %>
+
+    <h5>Party Name: <%= party.name %></h5>
+    </h5>Number of Guests: <%= party.guests %></h5>
+
+  <% end %>
+
+  <% @users.each do |user| %>
+    <li>Server: <%= user.username %></li>
+  <% end %>
+
+  <% @tables.each do |table| %>
+    <li>Table Number: <%= table.table_number %></li>
+  <% end %>
+
+  <% @order_tickets.each do |order_ticket| %>
+    <li>Status: <%= order_ticket.status %></li>
+  <% end %>
+</div>
+ -->
+
+
+ <style media="screen">
+   .table-ticket{
+     border: 1px solid black;
+   }
+
+ </style>
+
+<% @parties.each do |party| %>
+
+   <section class="table-ticket">
+     <h5>Party Name: <% party.name %></h5>
+     <p>
+       Server: <%= party.user.username %>
+     </p>
+     <p>
+       Table Number: <%= party.table.table_number %>
+     </p>
+     <ul>
+       <% party.menu_items.each do |item| %>
+        <li>
+          <%= item.name %>: <%= '%.2f' % item.price %>
+        </li>
+       <% end %>
+     </ul>
+     <h6>Total: $13</h6>
+   </section>
+
+<% end %>
+
+
+<!--
+<style media="screen">
+  .table-ticket{
+    border: 1px solid black;
+  }
+
+</style>
+
+
+<section class="table-ticket">
+  <h5>Party Name: Bob's Birthday</h5>
+  <p>
+    Server: Tobias
+  </p>
+  <p>
+    Table Number: 4
+  </p>
+  <ul>
+    <li>Soup: $4</li>
+    <li>Salad: $4</li>
+    <li>Sandwich: $5</li>
+  </ul>
+  <h6>Total: $13</h6>
+</section>
+-->
