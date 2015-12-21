@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="twelve columns">
+    <h1>Order Tickets</h1>
+  </div>
+</div>
+<div class="row">
+  <%= form_for @order_ticket do |f| %>
+  <div class="two columns">
+    <%= f.collection_select(:parties, Party.all, :id, :name) %>
+  </div>
+  <div class="three columns">
+    <%= f.collection_select(:menu_item_id, MenuItem.all, :id, :name) %>
+  </div>
+  <div class="six columns">
+    <%= f.submit %>
+  </div>
+  <% end %>
+</div>
+<div class="row">
+  <ul>
+    <% @order_tickets.each do |order_ticket| %>
+    <div class="twelve columns">
+      <li>
+        <%= order_ticket.party_id %>
+      </li>
+    </div>
+    <% end %>
+  </ul>
+</div>

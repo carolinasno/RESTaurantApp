@@ -1,0 +1,49 @@
+<div class="row">
+  <div class="twelve columns">
+    <h1>Parties</h1>
+  </div>
+</div>
+<div class="row">
+  <%= form_for @party do |f| %>
+  <div class="five columns">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  <div class="five columns">
+    <%= f.label :guests %>
+    <%= f.number_field :guests %>
+  </div>
+</div>
+<div class="row">
+  <div class="four columns">
+    <%= f.label :table_number %>
+    <%= f.text_field :table_number %>
+  </div>
+  <div class="four columns">
+    <%= f.label :server %>
+    <%= f.number_field :user_id %>
+  </div>
+  <div class="three columns">
+    <%= f.label :submit %>
+    <%= f.submit %>
+  </div>
+  <% end %>
+</div>
+
+<div class="row">
+  <ul>
+    <% @parties.each do |party| %>
+      <div class="eight columns">
+        <li>
+          <strong>Guest Name:</strong> <%= party.name %>, <strong># of Guests:</strong> <%= party.guests %>, <strong>Table #:</strong> <%= party.table_number %>, <strong>Server:</strong> <%= party.user_id %>
+        </li>
+      </div>
+      <div class="two columns">
+        <%= button_to "Edit", edit_party_path(party), method: :edit %>
+      </div>
+      <div class="two columns">
+        <%= button_to "Remove", party_path(party), method: :delete %>
+      </div>
+    <% end %>
+  </ul>
+</div>

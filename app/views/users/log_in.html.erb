@@ -1,9 +1,21 @@
-<h1>Admin Log In</h1>
-
-<%= form_tag sessions_path do %>
-  <%= label_tag :username %>
-  <%= text_field_tag :username %>
-  <%= label_tag :password %>
-  <%= password_field_tag :password %>
-  <%= submit_tag "Log In" %>
-<% end %>
+<div class="row">
+  <div class="twelve columns">
+    <h1>Admin Log In</h1>
+  </div>
+</div>
+<div class="row">
+  <%= form_tag sessions_path do %>
+  <div class="four columns">
+    <%= label_tag :username %>
+    <%= text_field_tag :username %>
+  </div>
+  <div class="four columns">
+    <%= label_tag :password %>
+    <%= password_field_tag :password %>
+  </div>
+  <div class="two columns">
+    <%= label_tag :submit %>
+    <%= submit_tag "Log In" %>
+  </div>
+  <% end %>
+</div>

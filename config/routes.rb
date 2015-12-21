@@ -1,12 +1,19 @@
 Rails.application.routes.draw do
 
   resources :users
+  resources :order_tickets
+  resources :menu_items
+  resources :parties
 
   root 'welcome#index'
 
   get '/new' => 'users#new'
   get '/log_in' => 'users#log_in'
   get '/profile' => 'users#profile'
+  get '/parties' => 'parties#index'
+
+  post 'menu_items/:id/edit' => 'menu_items#edit'
+  post 'parties/:id/edit' => 'parties#edit'
 
   post '/sessions' => 'sessions#create'
   delete '/sessions' => 'sessions#destroy'

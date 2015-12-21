@@ -13,7 +13,7 @@ class UsersController < ApplicationController
 
   def create
     User.create(user_params)
-    redirect_to root_path
+    redirect_to log_in_path
   end
 
   private
