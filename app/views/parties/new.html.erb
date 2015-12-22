@@ -1,50 +1,86 @@
-<div class="row">
-  <div class="twelve columns">
-    <h1>New Parties</h1>
-  </div>
-</div>
+<div class="container">
 
-<div class="row">
-  <%= form_for @party do |f| %>
-  <div class="five columns">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
+  <div class="row" id="main-menus">
+    <div class="four columns">
+      <a class="button" href="/">Home</a>
+    </div>
+    <div class="four columns">
+      <a class="button" href="/profile">Profile</a>
+    </div>
+    <div class="four columns">
+      <%= button_to "Log Out", sessions_path, method: :delete %>
+    </div>
   </div>
-  <div class="five columns">
-    <%= f.label :guests %>
-    <%= f.number_field :guests %>
-  </div>
-</div>
-<div class="row">
-  <div class="four columns">
-    <%= f.label :table_id %>
-    <%= f.text_field :table_id %>
-  </div>
-  <div class="four columns">
-    <%= f.label :server %>
-    <%= f.collection_select(:user_id, User.all, :id, :username) %>
-  </div>
-  <div class="three columns">
-    <%= f.label :submit %>
-    <%= f.submit %>
-  </div>
-  <% end %>
-</div>
 
-<div class="row">
-  <ul>
-    <% @parties.each do |party| %>
-      <div class="eight columns">
-        <li>
-          <strong>Guest Name:</strong> <%= party.name %>, <strong># of Guests:</strong> <%= party.guests %>, <strong>Table #:</strong> <%= party.table_id %>, <strong>Server:</strong> <%= party.user_id %>
-        </li>
-      </div>
-      <div class="two columns">
-        <%= button_to "Edit", edit_party_path(party), method: :edit %>
-      </div>
-      <div class="two columns">
-        <%= button_to "Remove", party_path(party), method: :delete %>
-      </div>
+  <div class="row">
+    <div class="twelve columns">
+      <h3>New Parties</h3>
+    </div>
+  </div>
+
+  <div class="row">
+    <%= form_for @party do |f| %>
+    <div class="three columns">
+      <%= f.label :name %>
+      <%= f.text_field :name, :placeholder => "Party Name" %>
+    </div>
+    <div class="three columns">
+      <%= f.label :guests %>
+      <%= f.number_field :guests, :placeholder => "Number of Guests" %>
+    </div>
+    <div class="three columns">
+      <%= f.label :server %>
+      <%= f.collection_select(:user_id, User.all, :id, :username) %>
+    </div>
+    <div class="two columns">
+      <%= f.label :submit %>
+      <%= f.submit %>
+    </div>
     <% end %>
-  </ul>
+  </div>
+
+  <div class="row">
+    <div class="three columns">
+      <h6>Party Name</h6>
+    </div>
+    <div class="three columns">
+      <h6>Number of Guests</h6>
+    </div>
+    <div class="two columns">
+      <h6>Server</h6>
+    </div>
+    <div class="two columns">
+      <h6>Edit</h6>
+    </div>
+    <div class="two columns">
+      <h6>Remove</h6>
+    </div>
+  </div>
+
+  <% @parties.each do |party| %>
+  <div class="row">
+    <div class="three columns">
+      <li>
+        <%= party.name %>
+      </li>
+    </div>
+    <div class="three columns">
+      <li>
+        <%= party.guests %>
+      </li>
+    </div>
+    <div class="two columns">
+      <li>
+        <%= party.user.username %>
+      </li>
+    </div>
+    <div class="two columns">
+      <%= button_to "Edit", edit_party_path(party), method: :edit %>
+    </div>
+    <div class="two columns">
+      <%= button_to "Remove", party_path(party), method: :delete %>
+    </div>
+  </div>
+
+  <% end %>
 </div>

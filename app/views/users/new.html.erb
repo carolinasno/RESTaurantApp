@@ -1,21 +1,32 @@
-<div class="row">
-  <div class="twelve columns">
-    <h1>New User</h1>
+<div class="container">
+
+  <div class="row">
+    <div class="twelve columns">
+      <h3>New User</h3>
+    </div>
   </div>
-</div>
-<div class="row">
-  <%= form_for @user do |f| %>
-  <div class="four columns">
-    <%= f.label :username %>
-    <%= f.text_field :username, :placeholder => "Username" %>
+
+  <div class="row" id="main-menus">
+    <div class="twelve columns">
+      <a class="button" href="/">Home</a>
+    </div>
   </div>
-  <div class="four columns">
-    <%= f.label :password %>
-    <%= f.password_field :password, :placeholder => "Password" %>
+
+  <div class="row">
+    <%= form_for @user do |f| %>
+    <div class="four columns">
+      <%= f.label :username %>
+      <%= f.text_field :username, :placeholder => "Username" %>
+    </div>
+    <div class="four columns">
+      <%= f.label :password %>
+      <%= f.password_field :password, :placeholder => "Password" %>
+    </div>
+    <div class="three columns">
+      <%= f.label :submit %>
+      <%= f.submit %>
+    </div>
+    <% end %>
   </div>
-  <div class="two columns">
-    <%= f.label :submit %>
-    <%= f.submit %>
-  </div>
-  <% end %>
+
 </div>

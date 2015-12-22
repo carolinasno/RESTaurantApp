@@ -1,19 +1,33 @@
-<div class="row">
-  <div class="twelve columns">
-    <h1>Welcome <%= current_user.username %></h1>
+<div class="container">
+
+  <div class="row" id="title">
+    <div class="twelve columns">
+      <h3>Welcome <%= current_user.username %>!</h3>
+    </div>
   </div>
-</div>
-<div class="row">
-  <div class="three columns">
-    <a class="button" href="/menu_items">Menu Items</a>
+
+  <div class="row" id="main-menus">
+    <div class="four columns">
+      <a class="button" href="/">Home</a>
+    </div>
+    <div class="four columns">
+      <a class="button" href="/profile">Profile</a>
+    </div>
+    <div class="four columns">
+      <%= button_to "Log Out", sessions_path, method: :delete %>
+    </div>
   </div>
-  <div class="three columns">
-    <a class="button" href="/parties">Parties</a>
+
+  <div class="row" id="user-menus">
+    <div class="four columns">
+      <a class="button" href="/parties">Parties</a>
+    </div>
+    <div class="four columns">
+      <a class="button" href="/menu_items">Menu Items</a>
+    </div>
+    <div class="four columns">
+      <a class="button" href="/order_tickets">Order Tickets</a>
+    </div>
   </div>
-  <div class="three columns">
-    <a class="button" href="/order_tickets">Order Tickets</a>
-  </div>
-  <div class="three columns">
-    <%= button_to "Log Out", sessions_path, method: :delete %>
-  </div>
+
 </div>

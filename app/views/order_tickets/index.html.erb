@@ -1,17 +1,44 @@
-<div class="row">
-  <div class="twelve columns">
-    <h1>Order Tickets</h1>
+<div class="row" id="main-menus">
+  <div class="four columns">
+    <a class="button" href="/">Home</a>
+  </div>
+  <div class="four columns">
+    <a class="button" href="/profile">Profile</a>
+  </div>
+  <div class="four columns">
+    <%= button_to "Log Out", sessions_path, method: :delete %>
   </div>
 </div>
 <div class="row">
-  <%= form_for @order_ticket do |f| %>
-  <div class="two columns">
-    <%= f.collection_select(:parties, Party.all, :id, :name) %>
+  <div class="four columns">
+    <a class="button" href="/parties">Parties</a>
   </div>
+  <div class="four columns">
+    <a class="button" href="/menu_items">Menu Items</a>
+  </div>
+  <div class="four columns">
+    <a class="button" href="/order_tickets">Order Tickets</a>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="twelve columns">
+    <h3>Order Tickets</h3>
+  </div>
+</div>
+
+<div class="row">
+  <%= form_for @order_ticket do |f| %>
   <div class="three columns">
+    <%= f.label :party_name %>
+    <%= f.collection_select(:party_id, Party.all, :id, :name) %>
+  </div>
+  <div class="four columns">
+    <%= f.label :menu_item %>
     <%= f.collection_select(:menu_item_id, MenuItem.all, :id, :name) %>
   </div>
-  <div class="six columns">
+  <div class="four columns">
+    <%= f.label :submit %>
     <%= f.submit %>
   </div>
   <% end %>

@@ -1,3 +1,3 @@
 class MenuItem < ActiveRecord::Base
-  belongs_to :order_tickets
+  has_many :order_tickets
 end
