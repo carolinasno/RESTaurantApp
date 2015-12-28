@@ -1,25 +1,35 @@
-<div class="row">
-  <div class="twelve columns">
-    <h1>Edit Menu Items</h1>
+<div class="pure-menu pure-menu-horizontal">
+  <ul class="pure-menu-list">
+      <li class="pure-menu-item"><a class="pure-menu-link" href="/">Home</a></li>
+      <li class="pure-menu-item"><a class="pure-menu-link" href="/profile">Profile</a></li>
+      <li class="pure-menu-item"><a class="pure-menu-link" href="/parties">Parties</a></li>
+      <li class="pure-menu-item"><a class="pure-menu-link" href="/menu_items">Menu Items</a></li>
+      <li class="pure-menu-item"><a class="pure-menu-link" href="/order_tickets">Order Tickets</a></li>
+  </ul>
+</div>
+
+<div class="pure-g">
+  <div class="pure-u-1-1">
+    <h3>Edit Menu Items</h3>
   </div>
 </div>
-<div class="row">
-  <%= form_for @menu_item do |f| %>
-  <div class="three columns">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </div>
-  <div class="three columns">
-    <%= f.label :description %>
-    <%= f.text_field :description %>
-  </div>
-  <div class="three columns">
-    <%= f.label :price %>
-    <%= f.number_field :price %>
-  </div>
-  <div class="two columns">
-    <%= f.label :submit %>
-    <%= f.submit %>
-  </div>
-  <% end %>
-</div>
+
+<%= form_for @menu_item, html: {class: 'pure-form pure-form-aligned'} do |f| %>
+  <fieldset>
+    <div class="pure-control-group">
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
+    <div class="pure-control-group">
+      <%= f.label :description %>
+      <%= f.text_field :description %>
+    </div>
+    <div class="pure-control-group">
+      <%= f.label :price %>
+      <%= f.number_field :price %>
+    </div>
+    <div class="pure-control-group">
+      <%= f.submit :class => "pure-button" %>
+    </div>
+  </fieldset>
+<% end %>

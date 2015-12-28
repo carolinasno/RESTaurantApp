@@ -1,33 +1,21 @@
-<div class="container">
+<div class="pure-menu pure-menu-horizontal">
+  <ul class="pure-menu-list">
+      <li class="pure-menu-item"><a class="pure-menu-link" href="/">Home</a></li>
+      <li class="pure-menu-item"><a class="pure-menu-link" href="/profile">Profile</a></li>
+      <li class="pure-menu-item"><a class="pure-menu-link" href="/parties">Parties</a></li>
+      <li class="pure-menu-item"><a class="pure-menu-link" href="/menu_items">Menu Items</a></li>
+      <li class="pure-menu-item"><a class="pure-menu-link" href="/order_tickets">Order Tickets</a></li>
+  </ul>
+</div>
 
-  <div class="row" id="title">
-    <div class="twelve columns">
-      <h3>Welcome <%= current_user.username %>!</h3>
-    </div>
+<div class="pure-g" id="title">
+  <div class="pure-u-1-1">
+    <h3>Welcome <%= current_user.username %>!</h3>
   </div>
+</div>
 
-  <div class="row" id="main-menus">
-    <div class="four columns">
-      <a class="button" href="/">Home</a>
-    </div>
-    <div class="four columns">
-      <a class="button" href="/profile">Profile</a>
-    </div>
-    <div class="four columns">
-      <%= button_to "Log Out", sessions_path, method: :delete %>
-    </div>
+<div class="pure-g">
+  <div class="pure-u-1-1">
+    <%= button_to "Log Out", sessions_path, method: :delete, :class => "pure-button" %>
   </div>
-
-  <div class="row" id="user-menus">
-    <div class="four columns">
-      <a class="button" href="/parties">Parties</a>
-    </div>
-    <div class="four columns">
-      <a class="button" href="/menu_items">Menu Items</a>
-    </div>
-    <div class="four columns">
-      <a class="button" href="/order_tickets">Order Tickets</a>
-    </div>
-  </div>
-
 </div>

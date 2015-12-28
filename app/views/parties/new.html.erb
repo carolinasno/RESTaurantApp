@@ -1,44 +1,39 @@
-<div class="container">
+<div class="pure-menu pure-menu-horizontal">
+  <ul class="pure-menu-list">
+      <li class="pure-menu-item"><a class="pure-menu-link" href="/">Home</a></li>
+      <li class="pure-menu-item"><a class="pure-menu-link" href="/profile">Profile</a></li>
+      <li class="pure-menu-item"><a class="pure-menu-link" href="/parties">Parties</a></li>
+      <li class="pure-menu-item"><a class="pure-menu-link" href="/menu_items">Menu Items</a></li>
+      <li class="pure-menu-item"><a class="pure-menu-link" href="/order_tickets">Order Tickets</a></li>
+  </ul>
+</div>
 
-  <div class="row" id="main-menus">
-    <div class="four columns">
-      <a class="button" href="/">Home</a>
-    </div>
-    <div class="four columns">
-      <a class="button" href="/profile">Profile</a>
-    </div>
-    <div class="four columns">
-      <%= button_to "Log Out", sessions_path, method: :delete %>
-    </div>
+<div class="pure-g">
+  <div class="pure-u-1-1">
+    <h3>New Parties</h3>
   </div>
+</div>
 
-  <div class="row">
-    <div class="twelve columns">
-      <h3>New Parties</h3>
-    </div>
-  </div>
-
-  <div class="row">
-    <%= form_for @party do |f| %>
-    <div class="three columns">
+<%= form_for @party, html: {class: "pure-form pure-form-aligned"} do |f| %>
+  <fieldset>
+    <div class="pure-control-group">
       <%= f.label :name %>
       <%= f.text_field :name, :placeholder => "Party Name" %>
     </div>
-    <div class="three columns">
+    <div class="pure-control-group">
       <%= f.label :guests %>
       <%= f.number_field :guests, :placeholder => "Number of Guests" %>
     </div>
-    <div class="three columns">
+    <div class="pure-control-group">
       <%= f.label :server %>
       <%= f.collection_select(:user_id, User.all, :id, :username) %>
     </div>
-    <div class="two columns">
-      <%= f.label :submit %>
-      <%= f.submit %>
+    <div class="pure-control-group">
+      <%= f.submit :class => "pure-button" %>
     </div>
-    <% end %>
-  </div>
-
+  </fieldset>
+<% end %>
+<!--
   <div class="row">
     <div class="three columns">
       <h6>Party Name</h6>
@@ -83,4 +78,4 @@
   </div>
 
   <% end %>
-</div>
+</div> -->

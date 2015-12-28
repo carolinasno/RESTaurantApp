@@ -10,15 +10,21 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require normalize
- *= require skeleton
  *= require_self
  */
 
 body {
-  background: bisque;
   text-align: center;
   font-family: 'Quicksand', sans-serif;
+}
+
+header {
+  background-color: steelblue;
+}
+
+a {
+  text-decoration: none;
+  color: steelblue;
 }
 
 li {
@@ -26,16 +32,24 @@ li {
 }
 
 h1 {
-  border: 1px dotted black;
-  vertical-align: middle;
-  width: 50%;
-  padding: 50px;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 80px;
+  color: white;
   margin: 0 auto;
-  margin-top: 30px;
-  margin-bottom: 30px;
+  padding: 20px;
 }
 
 h3 {
-  padding: 0px 20px 20px 20px;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 24px;
   margin: 0;
+  padding: 20px;
+}
+
+.pure-menu-horizontal {
+  background-color: gainsboro;
+}
+
+.pure-button {
+  font-family: 'Quicksand', sans-serif;
 }

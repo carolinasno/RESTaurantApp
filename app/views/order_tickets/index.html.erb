@@ -1,50 +1,36 @@
-<div class="row" id="main-menus">
-  <div class="four columns">
-    <a class="button" href="/">Home</a>
-  </div>
-  <div class="four columns">
-    <a class="button" href="/profile">Profile</a>
-  </div>
-  <div class="four columns">
-    <%= button_to "Log Out", sessions_path, method: :delete %>
-  </div>
+<div class="pure-menu pure-menu-horizontal">
+  <ul class="pure-menu-list">
+      <li class="pure-menu-item"><a class="pure-menu-link" href="/">Home</a></li>
+      <li class="pure-menu-item"><a class="pure-menu-link" href="/profile">Profile</a></li>
+      <li class="pure-menu-item"><a class="pure-menu-link" href="/parties">Parties</a></li>
+      <li class="pure-menu-item"><a class="pure-menu-link" href="/menu_items">Menu Items</a></li>
+      <li class="pure-menu-item"><a class="pure-menu-link" href="/order_tickets">Order Tickets</a></li>
+  </ul>
 </div>
-<div class="row">
-  <div class="four columns">
-    <a class="button" href="/parties">Parties</a>
-  </div>
-  <div class="four columns">
-    <a class="button" href="/menu_items">Menu Items</a>
-  </div>
-  <div class="four columns">
-    <a class="button" href="/order_tickets">Order Tickets</a>
-  </div>
-</div>
-<br>
-<div class="row">
-  <div class="twelve columns">
+
+<div class="pure-g">
+  <div class="pure-u-1-1">
     <h3>Order Tickets</h3>
   </div>
 </div>
 
-<div class="row">
-  <%= form_for @order_ticket do |f| %>
-  <div class="three columns">
-    <%= f.label :party_name %>
-    <%= f.collection_select(:party_id, Party.all, :id, :name) %>
-  </div>
-  <div class="four columns">
-    <%= f.label :menu_item %>
-    <%= f.collection_select(:menu_item_id, MenuItem.all, :id, :name) %>
-  </div>
-  <div class="four columns">
-    <%= f.label :submit %>
-    <%= f.submit %>
-  </div>
-  <% end %>
-</div>
+<%= form_for @order_ticket, html: {class: "pure-form pure-form-aligned"} do |f| %>
+  <fieldset>
+    <div class="pure-control-group">
+      <%= f.label :party_name %>
+      <%= f.collection_select(:party_id, Party.all, :id, :name) %>
+    </div>
+    <div class="pure-control-group">
+      <%= f.label :menu_item %>
+      <%= f.collection_select(:menu_item_id, MenuItem.all, :id, :name) %>
+    </div>
+    <div class="pure-control-group">
+      <%= f.submit :class => "pure-button" %>
+    </div>
+  </fieldset>
+<% end %>
 
-<div class="row">
+<!-- <div class="row">
   <ul>
     <% @order_tickets.each do |order_ticket| %>
     <div class="twelve columns">
@@ -54,4 +40,4 @@
     </div>
     <% end %>
   </ul>
-</div>
+</div> -->

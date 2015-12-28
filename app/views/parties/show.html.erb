@@ -1,62 +1,44 @@
-<div class="container">
-
-  <style media="screen">
-    .receipt{
-      border: 1px solid black;
-      margin: 10px;
-      padding: 20px 10px 10px 10px;
-    }
-  </style>
-
-  <div class="row" id="main-menus">
-    <div class="four columns">
-      <a class="button" href="/">Home</a>
-    </div>
-    <div class="four columns">
-      <a class="button" href="/profile">Profile</a>
-    </div>
-    <div class="four columns">
-      <%= button_to "Log Out", sessions_path, method: :delete %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="four columns">
-      <a class="button" href="/parties">Parties</a>
-    </div>
-    <div class="four columns">
-      <a class="button" href="/menu_items">Menu Items</a>
-    </div>
-    <div class="four columns">
-      <a class="button" href="/order_tickets">Order Tickets</a>
-    </div>
-  </div>
-
-  <div class="receipt">
-    <h3>Party Name: <%= @party.name %></h3>
-
-     <section class="table-ticket">
-       <p>
-         Server: <%= @party.user.username %>
-       </p>
-       <ul>
-         <h5>Order</h5>
-         <% @party.menu_items.each do |item| %>
-          <li>
-            <%= item.name %>: $<%= '%.2f' % item.price %>
-          </li>
-        <% end %>
-       </ul>
-       <h6>Sub Total: $<%= '%.2f' % @party.menu_items.sum(:price) %></h6>
-       <% price = @party.menu_items.sum(:price) %>
-       <h6>Tax: $<%= '%.2f' % (price * 0.09) %></h6>
-       <h6>Total: $<%= '%.2f' % ((price) + (price * 0.09)) %></h6>
-       <ul>
-         <li>Tip Suggestion</li>
-          <% price = @party.menu_items.sum(:price) %>
-         <li>15% = $<%= '%.2f' % (price * 0.15) %></li>
-         <li>20% = $<%= '%.2f' % (price * 0.20) %></li>
-         <li>25% = $<%= '%.2f' % (price * 0.25) %></li>
-       </ul>
-     </section>
-  </div>
+<div class="pure-menu pure-menu-horizontal">
+  <ul class="pure-menu-list">
+      <li class="pure-menu-item"><a class="pure-menu-link" href="/">Home</a></li>
+      <li class="pure-menu-item"><a class="pure-menu-link" href="/profile">Profile</a></li>
+      <li class="pure-menu-item"><a class="pure-menu-link" href="/parties">Parties</a></li>
+      <li class="pure-menu-item"><a class="pure-menu-link" href="/menu_items">Menu Items</a></li>
+      <li class="pure-menu-item"><a class="pure-menu-link" href="/order_tickets">Order Tickets</a></li>
+  </ul>
 </div>
+
+<style media="screen">
+  .table-ticket{
+    border: 1px solid black;
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-botton: 20px;
+    padding-bottom: 20px;
+    width: 30%;
+    heigh: 30%;
+  }
+</style>
+
+<section class="table-ticket">
+  <h4>Party Name: <%= @party.name %></h4>
+  <p><strong>Server:</strong> <%= @party.user.username %></p>
+
+  <li><u>Order</u></li>
+    <% @party.menu_items.each do |item| %>
+      <li><%= item.name %>: $<%= '%.2f' % item.price %></li>
+    <% end %>
+  <br>
+
+   <% price = @party.menu_items.sum(:price) %>
+   <li>Sub Total: $<%= '%.2f' % @party.menu_items.sum(:price) %></li>
+   <li>Tax: $<%= '%.2f' % (price * 0.09) %></li>
+   <li>Total: $<%= '%.2f' % ((price) + (price * 0.09)) %></li>
+   <br>
+
+   <li><u>Tip Suggestion</u></li>
+    <% price = @party.menu_items.sum(:price) %>
+   <li>15% = $<%= '%.2f' % (price * 0.15) %></li>
+   <li>20% = $<%= '%.2f' % (price * 0.20) %></li>
+   <li>25% = $<%= '%.2f' % (price * 0.25) %></li>
+</section>
