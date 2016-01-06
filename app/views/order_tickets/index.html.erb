@@ -1,12 +1,42 @@
-<div class="pure-menu pure-menu-horizontal">
-  <ul class="pure-menu-list">
+<!-- ADMIN -->
+<% if current_user.permission == 3 %>
+  <div class="pure-menu pure-menu-horizontal">
+    <ul class="pure-menu-list">
       <li class="pure-menu-item"><a class="pure-menu-link" href="/">Home</a></li>
       <li class="pure-menu-item"><a class="pure-menu-link" href="/profile">Profile</a></li>
       <li class="pure-menu-item"><a class="pure-menu-link" href="/parties">Parties</a></li>
       <li class="pure-menu-item"><a class="pure-menu-link" href="/menu_items">Menu Items</a></li>
       <li class="pure-menu-item"><a class="pure-menu-link" href="/order_tickets">Order Tickets</a></li>
-  </ul>
-</div>
+    </ul>
+  </div>
+
+<% end %>
+
+<!-- SERVER -->
+<% if current_user.permission == 2 %>
+  <div class="pure-menu pure-menu-horizontal">
+    <ul class="pure-menu-list">
+      <li class="pure-menu-item"><a class="pure-menu-link" href="/">Home</a></li>
+      <li class="pure-menu-item"><a class="pure-menu-link" href="/profile">Profile</a></li>
+      <li class="pure-menu-item"><a class="pure-menu-link" href="/parties">Parties</a></li>
+      <li class="pure-menu-item"><a class="pure-menu-link" href="/order_tickets">Order Tickets</a></li>
+    </ul>
+  </div>
+
+<% end %>
+
+<!-- CHEF -->
+<% if current_user.permission == 1 %>
+  <div class="pure-menu pure-menu-horizontal">
+    <ul class="pure-menu-list">
+      <li class="pure-menu-item"><a class="pure-menu-link" href="/">Home</a></li>
+      <li class="pure-menu-item"><a class="pure-menu-link" href="/profile">Profile</a></li>
+      <li class="pure-menu-item"><a class="pure-menu-link" href="/parties">Parties</a></li>
+      <li class="pure-menu-item"><a class="pure-menu-link" href="/menu_items">Menu Items</a></li>
+    </ul>
+  </div>
+
+<% end %>
 
 <div class="pure-g">
   <div class="pure-u-1-1">

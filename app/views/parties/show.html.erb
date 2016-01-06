@@ -1,12 +1,42 @@
-<div class="pure-menu pure-menu-horizontal">
-  <ul class="pure-menu-list">
+<!-- ADMIN -->
+<% if current_user.permission == 3 %>
+  <div class="pure-menu pure-menu-horizontal">
+    <ul class="pure-menu-list">
       <li class="pure-menu-item"><a class="pure-menu-link" href="/">Home</a></li>
       <li class="pure-menu-item"><a class="pure-menu-link" href="/profile">Profile</a></li>
       <li class="pure-menu-item"><a class="pure-menu-link" href="/parties">Parties</a></li>
       <li class="pure-menu-item"><a class="pure-menu-link" href="/menu_items">Menu Items</a></li>
       <li class="pure-menu-item"><a class="pure-menu-link" href="/order_tickets">Order Tickets</a></li>
-  </ul>
-</div>
+    </ul>
+  </div>
+
+<% end %>
+
+<!-- SERVER -->
+<% if current_user.permission == 2 %>
+  <div class="pure-menu pure-menu-horizontal">
+    <ul class="pure-menu-list">
+      <li class="pure-menu-item"><a class="pure-menu-link" href="/">Home</a></li>
+      <li class="pure-menu-item"><a class="pure-menu-link" href="/profile">Profile</a></li>
+      <li class="pure-menu-item"><a class="pure-menu-link" href="/parties">Parties</a></li>
+      <li class="pure-menu-item"><a class="pure-menu-link" href="/order_tickets">Order Tickets</a></li>
+    </ul>
+  </div>
+
+<% end %>
+
+<!-- CHEF -->
+<% if current_user.permission == 1 %>
+  <div class="pure-menu pure-menu-horizontal">
+    <ul class="pure-menu-list">
+      <li class="pure-menu-item"><a class="pure-menu-link" href="/">Home</a></li>
+      <li class="pure-menu-item"><a class="pure-menu-link" href="/profile">Profile</a></li>
+      <li class="pure-menu-item"><a class="pure-menu-link" href="/parties">Parties</a></li>
+      <li class="pure-menu-item"><a class="pure-menu-link" href="/menu_items">Menu Items</a></li>
+    </ul>
+  </div>
+
+<% end %>
 
 <style media="screen">
   .table-ticket{
@@ -22,18 +52,19 @@
 
 <section class="table-ticket">
   <h4>Party Name: <%= @party.name %></h4>
+  <p><strong>Party Size:</strong> <%= @party.guests %></p>
   <p><strong>Server:</strong> <%= @party.user.username %></p>
 
-  <li><u>Order</u></li>
+  <li><strong>Order</strong></li>
     <% @party.menu_items.each do |item| %>
       <li><%= item.name %>: $<%= '%.2f' % item.price %></li>
     <% end %>
   <br>
 
    <% price = @party.menu_items.sum(:price) %>
-   <li>Sub Total: $<%= '%.2f' % @party.menu_items.sum(:price) %></li>
-   <li>Tax: $<%= '%.2f' % (price * 0.09) %></li>
-   <li>Total: $<%= '%.2f' % ((price) + (price * 0.09)) %></li>
+   <li><strong>Sub Total: </strong>$<%= '%.2f' % @party.menu_items.sum(:price) %></li>
+   <li><strong>Tax: </strong>$<%= '%.2f' % (price * 0.09) %></li>
+   <li><strong>Total: </strong>$<%= '%.2f' % ((price) + (price * 0.09)) %></li>
    <br>
 
    <li><u>Tip Suggestion</u></li>
@@ -41,4 +72,8 @@
    <li>15% = $<%= '%.2f' % (price * 0.15) %></li>
    <li>20% = $<%= '%.2f' % (price * 0.20) %></li>
    <li>25% = $<%= '%.2f' % (price * 0.25) %></li>
+   <br>
+   <%= button_to "Complete Payment", party_path(@party), method: :delete, :class => "pure-button", :id => "pay-button" %>
+   <br>
+   <a class="pure-button" href="/parties/<%= @party.id %>/edit">Edit Party</a>
 </section>

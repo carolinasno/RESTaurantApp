@@ -143,7 +143,7 @@ dfn {
  */
 
 h1 {
-  font-size: 2em;
+  font-size: 4em;
   margin: 0.67em 0;
 }
 
@@ -504,7 +504,7 @@ th {
     /* IE10 uses display: flexbox */
     display: -ms-flexbox;
     -ms-flex-flow: row wrap;
-    
+
     /* Prevents distributing space between rows */
     -ms-align-content: flex-start;
 	-webkit-align-content: flex-start;
@@ -777,7 +777,7 @@ this the same font stack that Normalize.css sets for the `body`.
 /*csslint outline-none:false*/
 
 .pure-button {
-    font-family: inherit;
+    font-family: 'Quicksand', sans-serif;
     font-size: 100%;
     padding: 0.5em 1em;
     color: #444; /* rgba not supported (IE 8) */
@@ -1404,6 +1404,8 @@ since IE8 won't execute CSS that contains a CSS3 selector.
     border-spacing: 0;
     empty-cells: show;
     border: 1px solid #cbcbcb;
+    margin: 0 auto;
+    margin-top: 30px;
 }
 
 .pure-table caption {
@@ -1433,7 +1435,7 @@ there's a rowspan on the first cell. Case added to the tests. issue#432 */
 .pure-table thead {
     background-color: #e0e0e0;
     color: #000;
-    text-align: left;
+    text-align: center;
     vertical-align: bottom;
 }
 

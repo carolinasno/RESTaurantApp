@@ -1,13 +1,42 @@
-<div class="pure-menu pure-menu-horizontal">
-  <ul class="pure-menu-list">
+<!-- ADMIN -->
+<% if current_user.permission == 3 %>
+  <div class="pure-menu pure-menu-horizontal">
+    <ul class="pure-menu-list">
       <li class="pure-menu-item"><a class="pure-menu-link" href="/">Home</a></li>
       <li class="pure-menu-item"><a class="pure-menu-link" href="/profile">Profile</a></li>
       <li class="pure-menu-item"><a class="pure-menu-link" href="/parties">Parties</a></li>
       <li class="pure-menu-item"><a class="pure-menu-link" href="/menu_items">Menu Items</a></li>
       <li class="pure-menu-item"><a class="pure-menu-link" href="/order_tickets">Order Tickets</a></li>
-  </ul>
-</div>
+    </ul>
+  </div>
 
+<% end %>
+
+<!-- SERVER -->
+<% if current_user.permission == 2 %>
+  <div class="pure-menu pure-menu-horizontal">
+    <ul class="pure-menu-list">
+      <li class="pure-menu-item"><a class="pure-menu-link" href="/">Home</a></li>
+      <li class="pure-menu-item"><a class="pure-menu-link" href="/profile">Profile</a></li>
+      <li class="pure-menu-item"><a class="pure-menu-link" href="/parties">Parties</a></li>
+      <li class="pure-menu-item"><a class="pure-menu-link" href="/order_tickets">Order Tickets</a></li>
+    </ul>
+  </div>
+
+<% end %>
+
+<!-- CHEF -->
+<% if current_user.permission == 1 %>
+  <div class="pure-menu pure-menu-horizontal">
+    <ul class="pure-menu-list">
+      <li class="pure-menu-item"><a class="pure-menu-link" href="/">Home</a></li>
+      <li class="pure-menu-item"><a class="pure-menu-link" href="/profile">Profile</a></li>
+      <li class="pure-menu-item"><a class="pure-menu-link" href="/parties">Parties</a></li>
+      <li class="pure-menu-item"><a class="pure-menu-link" href="/menu_items">Menu Items</a></li>
+    </ul>
+  </div>
+
+<% end %>
 <div class="pure-g">
   <div class="pure-u-1-1">
     <h3>Parties</h3>
@@ -20,35 +49,38 @@
   </div>
 </div>
 
-<style media="screen">
- .table-ticket{
-   border: 1px solid black;
-   margin: 0 auto;
-   margin-top: 20px;
-   margin-botton: 20px;
-   padding-bottom: 20px;
-   width: 30%;
-   heigh: 30%;
- }
-</style>
-
-<% @parties.each do |party| %>
- <section class="table-ticket">
-   <h4>Party Name: <a href="/parties/<%= party.id %>"><%= party.name %></a></h4>
-   <p><strong>Server:</strong> <%= party.user.username %></p>
-   <li><u>Order</u></li>
-     <% party.menu_items.each do |item| %>
-      <li>
-        <%= item.name %>: $<%= '%.2f' % item.price %>
-      </li>
+  <table class="pure-table">
+    <thead>
+      <tr>
+        <th>Party Name</th>
+        <th>Party Size</th>
+        <th>Server</th>
+        <th>Order</th>
+        <th>Subtotal</th>
+        <th>Edit</th>
+      </tr>
+    </thead>
+    <% @parties.each do |party| %>
+      <tbody>
+        <tr>
+          <td><a href="/parties/<%= party.id %>"><%= party.name %></a></td>
+          <td><%= party.guests %></td>
+          <td><%= party.user.username %></td>
+          <td>
+            <% party.menu_items.each do |item| %>
+              <li>
+                <%= item.name %>: $<%= '%.2f' % item.price %>
+              </li>
+            <% end %>
+          </td>
+          <td>
+             <% price = party.menu_items.sum(:price) %>
+             $<%= '%.2f' % price %>
+           </td>
+           <td>
+             <a class="pure-button" href="/parties/<%= party.id %>/edit">Edit Party</a>
+           </td>
+        </tr>
+      </tbody>
     <% end %>
-    <br>
-   <% price = party.menu_items.sum(:price) %>
-   <li>Sub Total: $<%= '%.2f' % price %></li>
-   <li>Tax: $<%= '%.2f' % (price * 0.09) %></li>
-   <li>Total: $<%= '%.2f' % ((price) + (price * 0.09)) %></li>
-   <br>
-  <a class="pure-button" href="/parties/<%= party.id %>/edit">Edit Party</a>
-
- </section>
-<% end %>
+  </table>

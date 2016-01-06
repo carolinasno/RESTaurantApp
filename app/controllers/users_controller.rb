@@ -17,14 +17,37 @@ class UsersController < ApplicationController
   end
 
   def create
-    User.create(user_params)
-    redirect_to log_in_path
+    user = User.create(user_params)
+    if user.save
+      user.id = session[:user]
+      redirect_to log_in_path
+    else
+      flash[:error] = user.errors.full_messages
+      redirect_to new_user_path
+    end
+  end
+
+  def edit
+    @user = User.find(params[:id])
+  end
+
+  def update
+    @order = Order.find(params[:id])
+    @user = User.find(params[:id])
+    @user.update(employee_params)
+    redirect_to users_path
+  end
+
+  def destroy
+    user = User.find(params[:id])
+    user.delete
+    redirect_to user_path
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:username, :password)
+    params.require(:user).permit(:username, :password, :password_confirmation, :permission, :currency)
   end
 
 end
