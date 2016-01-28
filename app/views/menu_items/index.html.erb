@@ -64,19 +64,27 @@
   </div>
 <% end %>
 
-<ul>
-  <% @menu_items.each do |menu_item| %>
-    <li>
-      <div class="pure-u-1-2">
-        <%= menu_item.name %>, <%= menu_item.description %>, $<%= menu_item.price %>
-      </div>
-      <div class="pure-u-1-12">
-        <%= button_to "Edit", edit_menu_item_path(menu_item), method: :edit, :class => "pure-button" %>
-      </div>
-      <div class="pure-u-1-12">
-        <%= button_to "Remove", menu_item_path(menu_item), method: :delete, :class => "pure-button" %>
-      </div>
-    </li>
-    <br>
-  <% end %>
-</ul>
+
+<table class="pure-table">
+  <thead>
+    <tr>
+      <th>Menu Item</th>
+      <th>Description</th>
+      <th>Price</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @menu_items.each do |menu_item| %>
+    <tr class="menu-item-list">
+      <td><%= menu_item.name %></td>
+      <td><%= menu_item.description %></td>
+      <td>$<%= menu_item.price %></td>
+      <td>
+        <span style="display: inline-block"><%= button_to "Edit", edit_menu_item_path(menu_item), method: :edit, :class => "pure-button" %></span>
+        <span style="display: inline-block"><%= button_to "Remove", menu_item_path(menu_item), method: :delete, :class => "pure-button" %></span>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -81,3 +81,7 @@ p {
   font-family: 'Quicksand', sans-serif;
   background-color: #ede9ce;
 }
+
+.menu-item-action {
+  display: inline-block;
+}
