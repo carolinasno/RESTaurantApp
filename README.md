@@ -6,6 +6,7 @@ Placemat is the easy-to-use POS system designed to help manage your restaurant. 
 
 ### Development Approach
 
+
 ![development](/public/images/schema.jpg)
 
 ---
