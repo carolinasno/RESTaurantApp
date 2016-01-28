@@ -12,8 +12,9 @@ Rails.application.routes.draw do
   get '/log_in' => 'users#log_in'
   get '/profile' => 'users#profile'
   get '/parties' => 'parties#index'
-  get '/tables' => 'tables#index'
   get '/parties/new' => 'parties#new'
+  get '/tables' => 'tables#index'
+  get '/order_tickets' => 'order_tickets#index'
 
   post 'menu_items/:id/edit' => 'menu_items#edit'
   post 'parties/:id/edit' => 'parties#edit'
