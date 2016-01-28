@@ -45,4 +45,4 @@ Placemat is the easy-to-use POS system designed to help manage your restaurant. 
 
 ### URL
 
-https://pure-savannah-9926.herokuapp.com/
+https://placematapp.herokuapp.com/
