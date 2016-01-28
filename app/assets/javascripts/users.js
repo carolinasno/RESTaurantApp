@@ -1,13 +1,17 @@
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
+$(function(){
 
+  var $permissions = $('.permission');
+  var permissionTypes = ['chef', 'server', 'admin'];
 
-var permission = $(user.permission);
+  var permission;
+  var permissionNum;
 
-if (permission == 3) {
-  echo "Admin";
-} else if (permission == 2) {
-  echo "Server";
-} else {
-  echo "Chef";
-};
+  for (var i = 0; i < $permissions.length; i++) {
+    permissionNum = $permissions.eq(i).text();
+    permission = permissionTypes[permissionNum-1];
+    $permissions.eq(i).text(permission);
+  }
+
+});

@@ -5,4 +5,9 @@ class User < ActiveRecord::Base
   validates :password, confirmation: true
   validates :password_confirmation, presence: true
 
+  def permission_type
+      posible_types = ['Chef', 'Server', 'Admin']
+      posible_types[self.permission-1]
+  end
+
 end

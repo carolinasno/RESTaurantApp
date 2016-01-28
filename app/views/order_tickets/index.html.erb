@@ -4,11 +4,61 @@
     <ul class="pure-menu-list">
       <li class="pure-menu-item"><a class="pure-menu-link" href="/">Home</a></li>
       <li class="pure-menu-item"><a class="pure-menu-link" href="/profile">Profile</a></li>
+      <li class="pure-menu-item"><a class="pure-menu-link" href="/users">Users</a></li>
       <li class="pure-menu-item"><a class="pure-menu-link" href="/parties">Parties</a></li>
       <li class="pure-menu-item"><a class="pure-menu-link" href="/menu_items">Menu Items</a></li>
       <li class="pure-menu-item"><a class="pure-menu-link" href="/order_tickets">Order Tickets</a></li>
     </ul>
   </div>
+
+  <div class="pure-g">
+    <div class="pure-u-1-1">
+      <h3>Order Tickets</h3>
+    </div>
+  </div>
+
+  <%= form_for @order_ticket, html: {class: "pure-form pure-form-aligned"} do |f| %>
+    <fieldset>
+      <div class="pure-control-group">
+        <%= f.label :party_name %>
+        <%= f.collection_select(:party_id, Party.all, :id, :name) %>
+      </div>
+      <div class="pure-control-group">
+        <%= f.label :menu_item %>
+        <%= f.collection_select(:menu_item_id, MenuItem.all, :id, :name) %>
+      </div>
+      <div class="pure-control-group">
+        <%= f.label :modification %>
+        <%= f.text_field :notes, :placeholder => "ex. add extra cheese" %>
+      </div>
+      <div class="pure-control-group">
+        <%= f.submit :class => "pure-button" %>
+      </div>
+    </fieldset>
+  <% end %>
+
+  <table class="pure-table">
+    <thead>
+      <tr>
+        <th>Table Number</th>
+        <th>Created At</th>
+        <th>Menu Item</th>
+        <th>Modifications</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @order_tickets.each do |order_ticket| %>
+      <tr class="order-list" id="<%= order_ticket.id %>">
+        <td><%= order_ticket.party.table_number %></td>
+        <td><%= order_ticket.created_at.to_s(:short) %></td>
+        <td><%= order_ticket.menu_item.name %></td>
+        <td><%= order_ticket.notes %></td>
+        <td class="order-ticket-status" id="<%= order_ticket.created_at %>"> </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
 
 <% end %>
 
@@ -23,6 +73,55 @@
     </ul>
   </div>
 
+  <div class="pure-g">
+    <div class="pure-u-1-1">
+      <h3>Order Tickets</h3>
+    </div>
+  </div>
+
+  <%= form_for @order_ticket, html: {class: "pure-form pure-form-aligned"} do |f| %>
+    <fieldset>
+      <div class="pure-control-group">
+        <%= f.label :party_name %>
+        <%= f.collection_select(:party_id, Party.all, :id, :name) %>
+      </div>
+      <div class="pure-control-group">
+        <%= f.label :menu_item %>
+        <%= f.collection_select(:menu_item_id, MenuItem.all, :id, :name) %>
+      </div>
+      <div class="pure-control-group">
+        <%= f.label :modification %>
+        <%= f.text_field :notes, :placeholder => "ex. add extra cheese" %>
+      </div>
+      <div class="pure-control-group">
+        <%= f.submit :class => "pure-button" %>
+      </div>
+    </fieldset>
+  <% end %>
+
+  <table class="pure-table">
+    <thead>
+      <tr>
+        <th>Table Number</th>
+        <th>Created At</th>
+        <th>Menu Item</th>
+        <th>Modifications</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @order_tickets.each do |order_ticket| %>
+      <tr class="order-list" id="<%= order_ticket.id %>">
+        <td><%= order_ticket.party.table_number %></td>
+        <td><%= order_ticket.created_at.to_s(:short) %></td>
+        <td><%= order_ticket.menu_item.name %></td>
+        <td><%= order_ticket.notes %></td>
+        <td class="order-ticket-status" id="<%= order_ticket.created_at %>"> </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+
 <% end %>
 
 <!-- CHEF -->
@@ -33,41 +132,44 @@
       <li class="pure-menu-item"><a class="pure-menu-link" href="/profile">Profile</a></li>
       <li class="pure-menu-item"><a class="pure-menu-link" href="/parties">Parties</a></li>
       <li class="pure-menu-item"><a class="pure-menu-link" href="/menu_items">Menu Items</a></li>
+      <li class="pure-menu-item"><a class="pure-menu-link" href="/order_tickets">Order Tickets</a></li>
     </ul>
   </div>
 
-<% end %>
-
-<div class="pure-g">
-  <div class="pure-u-1-1">
-    <h3>Order Tickets</h3>
+  <div class="pure-g">
+    <div class="pure-u-1-1">
+      <h3>Order Tickets</h3>
+    </div>
   </div>
-</div>
 
-<%= form_for @order_ticket, html: {class: "pure-form pure-form-aligned"} do |f| %>
-  <fieldset>
-    <div class="pure-control-group">
-      <%= f.label :party_name %>
-      <%= f.collection_select(:party_id, Party.all, :id, :name) %>
-    </div>
-    <div class="pure-control-group">
-      <%= f.label :menu_item %>
-      <%= f.collection_select(:menu_item_id, MenuItem.all, :id, :name) %>
-    </div>
-    <div class="pure-control-group">
-      <%= f.submit :class => "pure-button" %>
-    </div>
-  </fieldset>
+  <table class="pure-table">
+    <thead>
+      <tr>
+        <th>Table Number</th>
+        <th>Created At</th>
+        <th>Menu Item</th>
+        <th>Modifications</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @order_tickets.each do |order_ticket| %>
+      <tr class="order-list" id="<%= order_ticket.id %>">
+        <td><%= order_ticket.party.table_number %></td>
+        <td><%= order_ticket.created_at.to_s(:short) %></td>
+        <td><%= order_ticket.menu_item.name %></td>
+        <td><%= order_ticket.notes %></td>
+        <td class="order-ticket-status" id="<%= order_ticket.created_at %>"> </td>
+        <td>
+          <form action="/order_tickets/<%= order_ticket.id %>/complete" method="post">
+            <input class="pure-button" type="submit" name="name" value="Complete">
+            <%= token_tag %>
+          </form>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+
 <% end %>
-
-<div class="row">
-  <ul>
-    <% @order_tickets.each do |order_ticket| %>
-    <div class="twelve columns">
-      <li>
-
-      </li>
-    </div>
-    <% end %>
-  </ul>
-</div>

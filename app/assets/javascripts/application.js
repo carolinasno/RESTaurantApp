@@ -12,5 +12,20 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
 //= require_tree .
+
+$(document).ready(function(){
+
+  $('.usd-conversion').click(function(e){
+    e.preventDefault();
+    $('.usd').show();
+    $('.eur').hide();
+  });
+
+  $('.eur-conversion').click(function(e){
+    e.preventDefault();
+    $('.eur').show();
+    $('.usd').hide();
+  });
+
+});

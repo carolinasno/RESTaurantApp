@@ -4,10 +4,23 @@
     <ul class="pure-menu-list">
       <li class="pure-menu-item"><a class="pure-menu-link" href="/">Home</a></li>
       <li class="pure-menu-item"><a class="pure-menu-link" href="/profile">Profile</a></li>
+      <li class="pure-menu-item"><a class="pure-menu-link" href="/users">Users</a></li>
       <li class="pure-menu-item"><a class="pure-menu-link" href="/parties">Parties</a></li>
       <li class="pure-menu-item"><a class="pure-menu-link" href="/menu_items">Menu Items</a></li>
       <li class="pure-menu-item"><a class="pure-menu-link" href="/order_tickets">Order Tickets</a></li>
     </ul>
+  </div>
+
+  <div class="pure-g">
+    <div class="pure-u-1-1">
+      <h3>Parties</h3>
+    </div>
+  </div>
+
+  <div class="pure-g">
+    <div class="pure-u-1-1">
+      <a class="pure-button" href="/parties/new">New Party</a>
+    </div>
   </div>
 
 <% end %>
@@ -23,6 +36,18 @@
     </ul>
   </div>
 
+  <div class="pure-g">
+    <div class="pure-u-1-1">
+      <h3>Parties</h3>
+    </div>
+  </div>
+
+  <div class="pure-g">
+    <div class="pure-u-1-1">
+      <a class="pure-button" href="/parties/new">New Party</a>
+    </div>
+  </div>
+
 <% end %>
 
 <!-- CHEF -->
@@ -33,54 +58,46 @@
       <li class="pure-menu-item"><a class="pure-menu-link" href="/profile">Profile</a></li>
       <li class="pure-menu-item"><a class="pure-menu-link" href="/parties">Parties</a></li>
       <li class="pure-menu-item"><a class="pure-menu-link" href="/menu_items">Menu Items</a></li>
+      <li class="pure-menu-item"><a class="pure-menu-link" href="/order_tickets">Order Tickets</a></li>
     </ul>
   </div>
 
 <% end %>
-<div class="pure-g">
-  <div class="pure-u-1-1">
-    <h3>Parties</h3>
-  </div>
-</div>
 
-<div class="pure-g">
-  <div class="pure-u-1-1">
-    <a class="pure-button" href="/parties/new">New Party</a>
-  </div>
-</div>
-
-  <table class="pure-table">
-    <thead>
+<table class="pure-table">
+  <thead>
+    <tr>
+      <th>Server</th>
+      <th>Table Number</th>
+      <th>Party Name</th>
+      <th>Party Size</th>
+      <th>Order</th>
+      <th>Subtotal</th>
+      <th>Edit</th>
+    </tr>
+  </thead>
+  <% @parties.each do |party| %>
+    <tbody>
       <tr>
-        <th>Party Name</th>
-        <th>Party Size</th>
-        <th>Server</th>
-        <th>Order</th>
-        <th>Subtotal</th>
-        <th>Edit</th>
+        <td><%= party.user.username %></td>
+        <td><%= party.table_number %></td>
+        <td><a href="/parties/<%= party.id %>"><%= party.name %></a></td>
+        <td><%= party.guests %></td>
+        <td>
+          <% party.menu_items.each do |item| %>
+            <li>
+              <%= item.name %>
+            </li>
+          <% end %>
+        </td>
+        <td>
+           <% price = party.menu_items.sum(:price) %>
+           $<%= '%.2f' % price %>
+         </td>
+         <td>
+           <a class="pure-button" href="/parties/<%= party.id %>/edit">Edit Party</a>
+         </td>
       </tr>
-    </thead>
-    <% @parties.each do |party| %>
-      <tbody>
-        <tr>
-          <td><a href="/parties/<%= party.id %>"><%= party.name %></a></td>
-          <td><%= party.guests %></td>
-          <td><%= party.user.username %></td>
-          <td>
-            <% party.menu_items.each do |item| %>
-              <li>
-                <%= item.name %>: $<%= '%.2f' % item.price %>
-              </li>
-            <% end %>
-          </td>
-          <td>
-             <% price = party.menu_items.sum(:price) %>
-             $<%= '%.2f' % price %>
-           </td>
-           <td>
-             <a class="pure-button" href="/parties/<%= party.id %>/edit">Edit Party</a>
-           </td>
-        </tr>
-      </tbody>
-    <% end %>
-  </table>
+    </tbody>
+  <% end %>
+</table>

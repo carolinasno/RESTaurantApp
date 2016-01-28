@@ -4,6 +4,7 @@
     <ul class="pure-menu-list">
       <li class="pure-menu-item"><a class="pure-menu-link" href="/">Home</a></li>
       <li class="pure-menu-item"><a class="pure-menu-link" href="/profile">Profile</a></li>
+      <li class="pure-menu-item"><a class="pure-menu-link" href="/users">Users</a></li>
       <li class="pure-menu-item"><a class="pure-menu-link" href="/parties">Parties</a></li>
       <li class="pure-menu-item"><a class="pure-menu-link" href="/menu_items">Menu Items</a></li>
       <li class="pure-menu-item"><a class="pure-menu-link" href="/order_tickets">Order Tickets</a></li>
@@ -33,6 +34,7 @@
       <li class="pure-menu-item"><a class="pure-menu-link" href="/profile">Profile</a></li>
       <li class="pure-menu-item"><a class="pure-menu-link" href="/parties">Parties</a></li>
       <li class="pure-menu-item"><a class="pure-menu-link" href="/menu_items">Menu Items</a></li>
+      <li class="pure-menu-item"><a class="pure-menu-link" href="/order_tickets">Order Tickets</a></li>
     </ul>
   </div>
 
@@ -47,12 +49,16 @@
 <%= form_for @party, html: {class: "pure-form pure-form-aligned"} do |f| %>
   <fieldset>
     <div class="pure-control-group">
+      <%= f.label :table_number %>
+      <%= f.text_field :table_number, :placeholder => "ex. A1" %>
+    </div>
+    <div class="pure-control-group">
       <%= f.label :name %>
       <%= f.text_field :name, :placeholder => "Party Name" %>
     </div>
     <div class="pure-control-group">
       <%= f.label :guests %>
-      <%= f.number_field :guests, :placeholder => "Number of Guests" %>
+      <%= f.number_field :guests, :placeholder => "Number of Guests", :min => 0 %>
     </div>
     <div class="pure-control-group">
       <%= f.label :server %>
@@ -64,48 +70,4 @@
   </fieldset>
 <% end %>
 
-  <div class="row">
-    <div class="three columns">
-      <h6>Party Name</h6>
-    </div>
-    <div class="three columns">
-      <h6>Number of Guests</h6>
-    </div>
-    <div class="two columns">
-      <h6>Server</h6>
-    </div>
-    <div class="two columns">
-      <h6>Edit</h6>
-    </div>
-    <div class="two columns">
-      <h6>Remove</h6>
-    </div>
-  </div>
-
-  <% @parties.each do |party| %>
-  <div class="row">
-    <div class="three columns">
-      <li>
-        <%= party.name %>
-      </li>
-    </div>
-    <div class="three columns">
-      <li>
-        <%= party.guests %>
-      </li>
-    </div>
-    <div class="two columns">
-      <li>
-        <%= party.user.username %>
-      </li>
-    </div>
-    <div class="two columns">
-      <%= button_to "Edit", edit_party_path(party), method: :edit %>
-    </div>
-    <div class="two columns">
-      <%= button_to "Remove", party_path(party), method: :delete %>
-    </div>
-  </div>
-
-  <% end %>
 </div>

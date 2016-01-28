@@ -32,22 +32,20 @@ class UsersController < ApplicationController
   end
 
   def update
-    @order = Order.find(params[:id])
     @user = User.find(params[:id])
-    @user.update(employee_params)
+    @user.update(user_params)
     redirect_to users_path
   end
 
   def destroy
-    user = User.find(params[:id])
-    user.delete
-    redirect_to user_path
+    User.delete(params[:id])
+    redirect_to users_path
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:username, :password, :password_confirmation, :permission, :currency)
+    params.require(:user).permit(:username, :password, :password_confirmation, :permission)
   end
 
 end

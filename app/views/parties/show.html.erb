@@ -4,6 +4,7 @@
     <ul class="pure-menu-list">
       <li class="pure-menu-item"><a class="pure-menu-link" href="/">Home</a></li>
       <li class="pure-menu-item"><a class="pure-menu-link" href="/profile">Profile</a></li>
+      <li class="pure-menu-item"><a class="pure-menu-link" href="/users">Users</a></li>
       <li class="pure-menu-item"><a class="pure-menu-link" href="/parties">Parties</a></li>
       <li class="pure-menu-item"><a class="pure-menu-link" href="/menu_items">Menu Items</a></li>
       <li class="pure-menu-item"><a class="pure-menu-link" href="/order_tickets">Order Tickets</a></li>
@@ -33,6 +34,7 @@
       <li class="pure-menu-item"><a class="pure-menu-link" href="/profile">Profile</a></li>
       <li class="pure-menu-item"><a class="pure-menu-link" href="/parties">Parties</a></li>
       <li class="pure-menu-item"><a class="pure-menu-link" href="/menu_items">Menu Items</a></li>
+      <li class="pure-menu-item"><a class="pure-menu-link" href="/order_tickets">Order Tickets</a></li>
     </ul>
   </div>
 
@@ -54,24 +56,31 @@
   <h4>Party Name: <%= @party.name %></h4>
   <p><strong>Party Size:</strong> <%= @party.guests %></p>
   <p><strong>Server:</strong> <%= @party.user.username %></p>
+  <p><strong>Table Number:</strong> <%= @party.table_number %></p>
+  <p><strong>Created At:</strong> <%= @party.created_at.to_s(:short) %></p>
 
   <li><strong>Order</strong></li>
     <% @party.menu_items.each do |item| %>
-      <li><%= item.name %>: $<%= '%.2f' % item.price %></li>
+      <li><%= item.name %>: <span class="usd">$</span><span style="display: none" class="eur">€</span><div class="usd"><%= '%.2f' % item.price %></div><div class="eur" style="display: none"><%= '%.2f' % (item.price * 0.9207) %></div></li>
     <% end %>
   <br>
 
-   <% price = @party.menu_items.sum(:price) %>
-   <li><strong>Sub Total: </strong>$<%= '%.2f' % @party.menu_items.sum(:price) %></li>
-   <li><strong>Tax: </strong>$<%= '%.2f' % (price * 0.09) %></li>
-   <li><strong>Total: </strong>$<%= '%.2f' % ((price) + (price * 0.09)) %></li>
+   <li><strong>Sub Total: </strong><span class="usd">$</span><span style="display: none" class="eur">€</span><div class="usd"><%= '%.2f' % orderSum %></div><div class="eur" style="display: none"><%= '%.2f' % orderEurSum %></div></li>
+   <li><strong>Tax: </strong><span class="usd">$</span><span style="display: none" class="eur">€</span><div class="usd"><%= '%.2f' % (orderSum * 0.09) %></div><div class="eur" style="display:none"><%= '%.2f' % (orderEurSum * 0.09) %></div></li>
+   <li><strong>Total: </strong><span class="usd">$</span><span style="display: none" class="eur">€</span><div class="usd"><%= '%.2f' % ((orderSum) + (orderSum * 0.09)) %></div><div class="eur" style="display: none"><%= '%.2f' % ((orderEurSum) + (orderEurSum * 0.09)) %></div></li>
    <br>
 
    <li><u>Tip Suggestion</u></li>
-    <% price = @party.menu_items.sum(:price) %>
-   <li>15% = $<%= '%.2f' % (price * 0.15) %></li>
-   <li>20% = $<%= '%.2f' % (price * 0.20) %></li>
-   <li>25% = $<%= '%.2f' % (price * 0.25) %></li>
+   <li>15% = <span class="usd">$</span><span style="display: none" class="eur">€</span><div class="usd"><%= '%.2f' % (orderSum * 0.15) %></div><div class="eur" style="display: none"><%= '%.2f' % (orderEurSum * 0.15) %></div></li>
+   <li>20% = <span class="usd">$</span><span style="display: none" class="eur">€</span><div class="usd"><%= '%.2f' % (orderSum * 0.20) %></div><div class="eur" style="display: none"><%= '%.2f' % (orderEurSum * 0.20) %></div></li>
+   <li>25% = <span class="usd">$</span><span style="display: none" class="eur">€</span><div class="usd"><%= '%.2f' % (orderSum * 0.25) %></div><div class="eur" style="display: none"><%= '%.2f' % (orderEurSum * 0.25) %></div></li>
+   <br>
+
+   <button type="button" name="usd" class="pure-button usd-conversion">$</button>
+
+   <button type="button" name="eur" class="pure-button eur-conversion">€</button>
+
+   <br>
    <br>
    <%= button_to "Complete Payment", party_path(@party), method: :delete, :class => "pure-button", :id => "pay-button" %>
    <br>

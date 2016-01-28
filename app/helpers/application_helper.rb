@@ -10,4 +10,12 @@ module ApplicationHelper
     redirect_to root_path unless current_user
   end
 
+  def orderSum
+    @party.menu_items.sum(:price)
+  end
+
+  def orderEurSum
+    @party.menu_items.sum(:price) * 0.9207
+  end
+
 end
